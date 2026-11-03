@@ -1,5 +1,7 @@
 package com.rith.java.developer.rith_computershope.util;
 
+import org.jspecify.annotations.Nullable;
+
 import com.rith.java.developer.rith_computershope.dto.BrandDTO;
 import com.rith.java.developer.rith_computershope.entity.Brand;
 
@@ -9,5 +11,12 @@ public class Mapper {
 		brand.setId(dto.getId());//if we don't want to return id ,just mark don't use this line
 		brand.setName(dto.getName());
 		return brand;
+	}
+
+	public static BrandDTO toBrandDTO(Brand brand) {
+		BrandDTO brandDTO =new BrandDTO();
+		brandDTO.setId(brand.getId());
+		brandDTO.setName(brand.getName());
+		return brandDTO;
 	}
 }

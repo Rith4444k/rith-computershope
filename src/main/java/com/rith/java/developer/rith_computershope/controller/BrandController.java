@@ -5,6 +5,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -28,11 +29,11 @@ public class BrandController {
 	public ResponseEntity<?> createBrand(@RequestBody BrandDTO branddto) {
 		Brand brand=Mapper.toEntity(branddto);
 		brand=brandservice.create(brand);
-		return ResponseEntity.ok(brand);
+		return ResponseEntity.ok(Mapper.toBrandDTO(brand));
 	}
-	@GetMapping
-	public ResponseEntity<List<Brand>> getBrands() {
-		List<Brand> brands = brandservice.getBrands();
-		return  ResponseEntity.ok(brands);
+	@GetMapping("/{id}")
+	public ResponseEntity<?> getBrandById(@PathVariable("id") Integer Id) {//if i don't want to use @PathVariable("id") i just change GetMapping("{id}") to Id like Integer Id
+		Brand brand=brandservice.getById(Id);
+		return ResponseEntity.ok(Mapper.toBrandDTO(brand));
 	}
 }

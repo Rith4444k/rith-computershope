@@ -7,5 +7,6 @@ import com.rith.java.developer.rith_computershope.entity.Brand;
 
 public interface BrandService  {
 	Brand create(Brand brand);
-	List<Brand>  getBrands();
+	Brand getById(Integer id);
+	
 }
