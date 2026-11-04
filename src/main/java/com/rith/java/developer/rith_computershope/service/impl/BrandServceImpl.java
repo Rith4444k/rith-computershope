@@ -9,6 +9,8 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.client.HttpClientErrorException;
 
 import com.rith.java.developer.rith_computershope.entity.Brand;
+import com.rith.java.developer.rith_computershope.exception.ApiException;
+import com.rith.java.developer.rith_computershope.exception.ResourceNotFoundException;
 import com.rith.java.developer.rith_computershope.repository.BrandRepository;
 import com.rith.java.developer.rith_computershope.service.BrandService;
 
@@ -23,21 +25,37 @@ public class BrandServceImpl implements BrandService{
 		return brandrepository.save(brand);
 	}
 
-
-	@SuppressWarnings("deprecation")
-	@Override
+	// Version one  
+	/*@Override
 	public Brand getById(Integer id) {
 		//return brandrepository.getById(id);
 		Optional<Brand>brandOptional = brandrepository.findById(id);
 		if(brandOptional.isPresent()) {
 			return brandOptional.get();
 		}else {
-			throw new HttpClientErrorException(HttpStatus.NOT_FOUND,"Brand with id ="+id+"not found ");
-		}
-		 
+			//throw new HttpClientErrorException(HttpStatus.NOT_FOUND,"Brand with id ="+id+"not found ");
+			throw new HttpClientErrorException(HttpStatus.NOT_FOUND,"Brand with id = %d not found ".formatted(id));
+		}*/
+	
+	// Version two with package exception 
+	@Override
+	public Brand getById(Integer id) {
+		//V1
+		/*return brandrepository.findById(id) // use optional + supplier orElseThrow(as functional interface) 
+			  .orElseThrow(()->new ApiException(HttpStatus.NOT_FOUND,"Brand with id= %d not found".formatted(id)));*/
+		//v2 use ResourceNotfound
+		return brandrepository.findById(id) 
+				  .orElseThrow(()->new ResourceNotFoundException("Brand", id));
 	}
 
+	@Override
+	public Brand update(Integer id, Brand brandUpdated) {
+		Brand brand = getById(id);
+		brand.setName(brandUpdated.getName());//Version1 TODO improve
+		return brandrepository.save(brand);
+	}
 
+ 
 
 
 
