@@ -1,0 +1,1 @@
+Mapper use mapstruct auto create when we add new propertity in Entity class.
