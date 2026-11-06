@@ -1,13 +1,18 @@
 package com.rith.java.developer.rith_computershope.controller;
 
+import java.util.List;
+import java.util.stream.Collectors;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.rith.java.developer.rith_computershope.dto.BrandDTO;
@@ -41,4 +46,23 @@ public class BrandController {
 		Brand brandUpdated=brandservice.update(brandId, brand);
 		return ResponseEntity.ok(BrandMapper.INSTANCE.toBrandDTO(brandUpdated));
 	} 
+	@GetMapping()//Version 1
+	public ResponseEntity<?> getBrands() {
+		return ResponseEntity.ok(brandservice.getBrands());
+	}
+	@GetMapping("filter")//Version 2 map to brandDTO use stream + map and collect+ filter
+	public ResponseEntity<?> getBrands(@RequestParam("name") String name ) {
+		List<BrandDTO> list=brandservice.getBrands(name)
+			.stream()
+			.map(brand -> BrandMapper.INSTANCE.toBrandDTO(brand))
+			.collect(Collectors.toList());
+		return ResponseEntity.ok(list);
+	}
+	@DeleteMapping("/{id}") 
+	public ResponseEntity<?> updateById(@PathVariable("id") Integer brandId  ) {
+		brandservice.deleteById(brandId);
+		String respone ="Brand deleted successfully";
+		return ResponseEntity.ok(respone);
+	} 
+	
 }

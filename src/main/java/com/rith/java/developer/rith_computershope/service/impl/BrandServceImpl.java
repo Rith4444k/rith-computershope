@@ -55,9 +55,24 @@ public class BrandServceImpl implements BrandService{
 		return brandrepository.save(brand);
 	}
 
- 
+	@Override
+	public List<Brand> getBrands() {		
+		return brandrepository.findAll();
+	}
 
-   
+	@Override
+	public List<Brand> getBrands(String name) {
+
+		return brandrepository.findByNameContaining(name);
+	}
+
+	@Override
+	public void deleteById(Integer Id) {
+		Brand brand=getById(Id);
+	    brandrepository.deleteById(Id);
+	}
+
+	
 
 
 

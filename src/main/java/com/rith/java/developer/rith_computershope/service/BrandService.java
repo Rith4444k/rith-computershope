@@ -9,4 +9,7 @@ public interface BrandService  {
 	Brand create(Brand brand);
 	Brand getById(Integer id);
 	Brand update(Integer id,Brand brandUpdated);
+	List<Brand> getBrands();
+	List<Brand> getBrands(String name);
+	void deleteById(Integer Id);
 }
