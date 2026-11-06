@@ -1,6 +1,7 @@
 package com.rith.java.developer.rith_computershope.controller;
 
 import java.util.List;
+import java.util.Map;
 import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -46,17 +47,17 @@ public class BrandController {
 		Brand brandUpdated=brandservice.update(brandId, brand);
 		return ResponseEntity.ok(BrandMapper.INSTANCE.toBrandDTO(brandUpdated));
 	} 
-	@GetMapping()//Version 1
+	/*@GetMapping//Version 1
 	public ResponseEntity<?> getBrands() {
 		return ResponseEntity.ok(brandservice.getBrands());
-	}
-	@GetMapping("filter")//Version 2 map to brandDTO use stream + map and collect+ filter
-	public ResponseEntity<?> getBrands(@RequestParam("name") String name ) {
-		List<BrandDTO> list=brandservice.getBrands(name)
-			.stream()
-			.map(brand -> BrandMapper.INSTANCE.toBrandDTO(brand))
-			.collect(Collectors.toList());
-		return ResponseEntity.ok(list);
+	}*/
+	@GetMapping//Version 2 map to brandDTO use stream + map and collect+ JPA SCP
+	public ResponseEntity<?> getBrands(@RequestParam Map<String , String> params ) {
+		List<BrandDTO> list=brandservice.getBrands(params)
+				.stream()
+				.map(brand -> BrandMapper.INSTANCE.toBrandDTO(brand))
+				.collect(Collectors.toList());
+			return ResponseEntity.ok(list);
 	}
 	@DeleteMapping("/{id}") 
 	public ResponseEntity<?> updateById(@PathVariable("id") Integer brandId  ) {

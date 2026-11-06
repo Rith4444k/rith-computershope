@@ -1,6 +1,7 @@
 package com.rith.java.developer.rith_computershope.service.impl;
 
 import java.util.List;
+import java.util.Map;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,6 +14,8 @@ import com.rith.java.developer.rith_computershope.exception.ApiException;
 import com.rith.java.developer.rith_computershope.exception.ResourceNotFoundException;
 import com.rith.java.developer.rith_computershope.repository.BrandRepository;
 import com.rith.java.developer.rith_computershope.service.BrandService;
+import com.rith.java.developer.rith_computershope.specifition.BrandFilter;
+import com.rith.java.developer.rith_computershope.specifition.BrandSpec;
 
 @Service      //We need to mark @service here because this is a business logic or service layer
 public class BrandServceImpl implements BrandService{
@@ -54,22 +57,32 @@ public class BrandServceImpl implements BrandService{
 		brand.setName(brandUpdated.getName());//Version1 TODO improve
 		return brandrepository.save(brand);
 	}
-
+/*
 	@Override
 	public List<Brand> getBrands() {		
 		return brandrepository.findAll();
-	}
-
-	@Override
-	public List<Brand> getBrands(String name) {
-
-		return brandrepository.findByNameContaining(name);
-	}
-
+	}V1
+*/
+	
 	@Override
 	public void deleteById(Integer Id) {
 		Brand brand=getById(Id);
 	    brandrepository.deleteById(Id);
+	}
+
+	@Override
+	public List<Brand> getBrands(Map<String, String> params) {
+		BrandFilter brandFilter=new BrandFilter();
+		if(params.containsKey("name")) {
+			String param=params.get("name");
+			brandFilter.setName(param);
+		}
+		if(params.containsKey("id")) {
+			String id=params.get("id");
+			brandFilter.setId(Integer.parseInt(id));
+		}
+		BrandSpec brandSpec =new BrandSpec(brandFilter);
+		return brandrepository.findAll(brandSpec);
 	}
 
 	
@@ -77,4 +90,4 @@ public class BrandServceImpl implements BrandService{
 
 
 }
- 
+ ;
