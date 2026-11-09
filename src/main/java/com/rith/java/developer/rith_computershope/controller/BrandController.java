@@ -5,6 +5,7 @@ import java.util.Map;
 import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -17,6 +18,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.rith.java.developer.rith_computershope.dto.BrandDTO;
+import com.rith.java.developer.rith_computershope.dto.PageDTO;
 import com.rith.java.developer.rith_computershope.entity.Brand;
 import com.rith.java.developer.rith_computershope.mapper.BrandMapper;
 import com.rith.java.developer.rith_computershope.service.BrandService;
@@ -53,11 +55,14 @@ public class BrandController {
 	}*/
 	@GetMapping//Version 2 map to brandDTO use stream + map and collect+ JPA SCP
 	public ResponseEntity<?> getBrands(@RequestParam Map<String , String> params ) {
-		List<BrandDTO> list=brandservice.getBrands(params)
+		Page<Brand> page = brandservice.getBrands(params);
+		PageDTO pageDTO=new PageDTO(page);
+		//for test
+		/*List<BrandDTO> list=brandservice.getBrands(params) 
 				.stream()
 				.map(brand -> BrandMapper.INSTANCE.toBrandDTO(brand))
-				.collect(Collectors.toList());
-			return ResponseEntity.ok(list);
+				.collect(Collectors.toList());*/
+			return ResponseEntity.ok(pageDTO);
 	}
 	@DeleteMapping("/{id}") 
 	public ResponseEntity<?> updateById(@PathVariable("id") Integer brandId  ) {
