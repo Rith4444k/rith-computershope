@@ -19,7 +19,9 @@ public class BrandSpec implements Specification<Brand> {
 	@Override
 	public Predicate toPredicate(Root<Brand> brand, CriteriaQuery<?> query, CriteriaBuilder criteriaBuilder) {
 		if(brandFilter.getName()!=null) {
-			Predicate	name=	brand.get("name").in(brandFilter.getName());
+			//Predicate	name=	brand.get("name").in(brandFilter.getName());
+			//Improve Filter
+			Predicate name = criteriaBuilder.like(criteriaBuilder.upper(brand.get("name")), "%"+brandFilter.getName().toUpperCase()+"%");
 			predicates.add(name);
 		}
 		
@@ -29,7 +31,7 @@ public class BrandSpec implements Specification<Brand> {
 			
 		}
 		//return criteriaBuilder.and(predicates.toArray(new Predicate[0]));v1
-		return criteriaBuilder.and(predicates.toArray(Predicate[]::new));//v2
+		return criteriaBuilder.and(predicates.toArray(Predicate[]::new));//v2 java 8
 	}
 	
 }
