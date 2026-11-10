@@ -12,9 +12,9 @@ import com.rith.java.developer.rith_computershope.entity.Brand;
 import com.rith.java.developer.rith_computershope.exception.ResourceNotFoundException;
 import com.rith.java.developer.rith_computershope.repository.BrandRepository;
 import com.rith.java.developer.rith_computershope.service.BrandService;
+import com.rith.java.developer.rith_computershope.service.util.PageUtil;
 import com.rith.java.developer.rith_computershope.specifition.BrandFilter;
 import com.rith.java.developer.rith_computershope.specifition.BrandSpec;
-import com.rith.java.developer.rith_computershope.util.PageUtil;
 
 @Service      //We need to mark @service here because this is a business logic or service layer
 public class BrandServceImpl implements BrandService{
@@ -88,7 +88,7 @@ public class BrandServceImpl implements BrandService{
 	@Override//Apply JPA V2+ Pageable
 	public Page<Brand> getBrands(Map<String, String> params) {
 		BrandFilter brandFilter=new BrandFilter();
-		if(params.containsKey("name")) {
+		if(params.containsKey("name")) {      
 			String param=params.get("name");
 			brandFilter.setName(param);
 		}

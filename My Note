@@ -1,1 +1,16 @@
 Mapper use mapstruct auto create when we add new propertity in Entity class.
+===================================================================================
+Unit test have 3 step . for example
+		//Given 
+		List<String>names=List.of("Tra","Mora","Seyha","Rith");
+		//When
+		List<Integer> list= GeneralUtils.toIntegerLish(names);
+		//Then
+		//[3,4,5,4]
+		assertEquals(4, list.size());
+And In Spring boot we need to test 3 Step 
+	+Controller
+	+Service
+	+Repository
+===================================================================================
+For Me use only Code Coverage   

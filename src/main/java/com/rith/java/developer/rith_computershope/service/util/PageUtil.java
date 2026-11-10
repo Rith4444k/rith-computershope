@@ -1,4 +1,4 @@
-package com.rith.java.developer.rith_computershope.util;
+package com.rith.java.developer.rith_computershope.service.util;
 
 
 
