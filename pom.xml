@@ -28,7 +28,7 @@
 	</scm>
 	<properties>
 		<java.version>25</java.version>
-		<!--  h2database Test Configuration -->
+		<!--Add For Test H2 DB-->
 		<argLine></argLine>
 	</properties>
 	<dependencies>
@@ -71,10 +71,17 @@
     		<scope>test</scope>
 		</dependency>
 		<!--  h2database Test Configuration -->
+		<!-- H2 Database -->
 		<dependency>
-    		<groupId>com.h2database</groupId>
-    		<artifactId>h2</artifactId>
-    		<scope>test</scope>
+		    <groupId>com.h2database</groupId>
+		    <artifactId>h2</artifactId>
+		    <scope>runtime</scope>
+		</dependency>
+		
+		<!-- H2 Console for Spring Boot 4 -->
+		<dependency>
+		    <groupId>org.springframework.boot</groupId>
+		    <artifactId>spring-boot-h2console</artifactId>
 		</dependency>
 	</dependencies>
 

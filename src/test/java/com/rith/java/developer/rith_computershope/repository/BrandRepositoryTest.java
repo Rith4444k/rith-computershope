@@ -29,21 +29,4 @@ public class BrandRepositoryTest {
 		assertEquals("Assus", brands.get(0).getName());
 		assertEquals(1, brands.get(0).getId());
 	}
-	@Test
-	public void testFindByNameContaining() {
-		//Given 
-		Brand brand1 =new Brand();
-		brand1.setName("assus");
-		Brand brand2 = new Brand();
-		brand2.setName("Samsung");
-		brandRepository.save(brand1);
-		brandRepository.save(brand2);
-		//When 
-		List<Brand> brandtest2 = brandRepository.findByNameContaining("A");
-		//Then
-		assertEquals(2, brandtest2.size());
-		assertEquals("assus", brandtest2.get(0).getName());
-		assertEquals("Samsung", brandtest2.get(1).getName());
-		assertEquals(1, brandtest2.get(0).getId());
-	}
 }

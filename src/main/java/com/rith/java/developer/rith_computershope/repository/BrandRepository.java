@@ -13,6 +13,5 @@ import com.rith.java.developer.rith_computershope.specifition.BrandSpec;
 public interface BrandRepository extends JpaRepository<Brand, Integer>, JpaSpecificationExecutor<Brand> {
 
 	List<Brand>findBynameLike(String name);
-	List<Brand>findByNameContaining(String name);
 }
 
