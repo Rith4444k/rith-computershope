@@ -16,11 +16,15 @@ import com.rith.java.developer.rith_computershope.service.util.PageUtil;
 import com.rith.java.developer.rith_computershope.specifition.BrandFilter;
 import com.rith.java.developer.rith_computershope.specifition.BrandSpec;
 
-@Service      //We need to mark @service here because this is a business logic or service layer
-public class BrandServceImpl implements BrandService{
-	@Autowired
-	private  BrandRepository brandrepository;
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.RequiredArgsConstructor;
 
+@Service      //We need to mark @service here because this is a business logic or service layer
+@RequiredArgsConstructor // Here use for easy to test At Unit Test + private final BrandRepository ....;
+public class BrandServiceImpl implements BrandService{
+	@Autowired
+	private final BrandRepository brandrepository;
 	
 	@Override
 	public Brand create(Brand brand) {

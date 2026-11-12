@@ -38,6 +38,8 @@ In Spring boot we need to test 3 Step
 ===================================================================================
 For Me use only Code Coverage 
 Coverage
+When it's mark green it's already Test (ok)
+When it's mark red we need to Create Unit test ..
 ===================================================================================
 Repository Unit test 
 Run as>JUnit Test..
