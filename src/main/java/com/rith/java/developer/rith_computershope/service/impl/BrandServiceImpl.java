@@ -30,24 +30,10 @@ public class BrandServiceImpl implements BrandService{
 	public Brand create(Brand brand) {
 		return brandrepository.save(brand);
 	}
-
-	// Version one  
-	/*@Override
-	public Brand getById(Integer id) {
-		Optional<Brand>brandOptional = brandrepository.findById(id);
-		if(brandOptional.isPresent()) {
-			return brandOptional.get();
-		}else {
-			throw new HttpClientErrorException(HttpStatus.NOT_FOUND,"Brand with id = %d not found ".formatted(id));
-		}*/
 	
 	// Version two with package exception 
 	@Override
 	public Brand getById(Integer id) {
-		//V1
-		/*return brandrepository.findById(id) // use optional + supplier orElseThrow(as functional interface) 
-			  .orElseThrow(()->new ApiException(HttpStatus.NOT_FOUND,"Brand with id= %d not found".formatted(id)));*/
-		//v2 use ResourceNotfound
 		return brandrepository.findById(id) 
 				  .orElseThrow(()->new ResourceNotFoundException("Brand", id));
 	}

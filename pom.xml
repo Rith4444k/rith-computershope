@@ -91,47 +91,40 @@
 				<groupId>org.springframework.boot</groupId>
 				<artifactId>spring-boot-maven-plugin</artifactId>
 			</plugin>
+			<!--New Pom.xml-->
 			<plugin>
-				<groupId>org.apache.maven.plugins</groupId>
-				<artifactId>maven-compiler-plugin</artifactId>
-				<executions>
-					<execution>
-						<id>default-compile</id>
-						<phase>compile</phase>
-						<goals>
-							<goal>compile</goal>
-						</goals>
-						<configuration>
-							<annotationProcessorPaths>
-								<path>
-                                     <groupId>org.mapstruct</groupId>
-                                     <artifactId>mapstruct-processor</artifactId>
-                                     <version>1.6.3</version>
-            					</path>                     
-								<path>
-									<groupId>org.projectlombok</groupId>
-									<artifactId>lombok</artifactId>
-								</path>
-							</annotationProcessorPaths>
-						</configuration>
-					</execution>
-					<execution>
-						<id>default-testCompile</id>
-						<phase>test-compile</phase>
-						<goals>
-							<goal>testCompile</goal>
-						</goals>
-						<configuration>
-							<annotationProcessorPaths>
-								<path>
-									<groupId>org.projectlombok</groupId>
-									<artifactId>lombok</artifactId>
-								</path>
-							</annotationProcessorPaths>
-						</configuration>
-					</execution>
-				</executions>
+			    <groupId>org.apache.maven.plugins</groupId>
+			    <artifactId>maven-compiler-plugin</artifactId>
+			    <version>3.15.0</version>
+			
+			    <configuration>
+			        <annotationProcessorPaths>
+			
+			            <!-- Lombok -->
+			            <path>
+			                <groupId>org.projectlombok</groupId>
+			                <artifactId>lombok</artifactId>
+			                <version>1.18.46</version>
+			            </path>
+			
+			            <!-- Lombok + MapStruct Binding -->
+			            <path>
+    		            <groupId>org.projectlombok</groupId>
+    		            <artifactId>lombok-mapstruct-binding</artifactId>
+    		            <version>0.2.0</version>
+    		        </path>
+			
+			            <!-- MapStruct -->
+			            <path>
+			                <groupId>org.mapstruct</groupId>
+			                <artifactId>mapstruct-processor</artifactId>
+			                <version>1.6.3</version>
+			            </path>
+			
+			        </annotationProcessorPaths>
+			    </configuration>
 			</plugin>
+
 			<!-- 3. Mockito Java Agent Add when i apply unit test repository with h2 data sources-->
 			<plugin>
 			    <groupId>org.apache.maven.plugins</groupId>
