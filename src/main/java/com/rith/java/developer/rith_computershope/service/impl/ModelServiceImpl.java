@@ -15,8 +15,7 @@ public class ModelServiceImpl implements ModelService {
 	private BrandService brandService;
 	@Override
 	public Model save(Model model) {
-		Integer brandId=model.getBrand().getId();
-		brandService.getById(brandId);
+		
 		return modelRepository.save(model);
 		
 	}
