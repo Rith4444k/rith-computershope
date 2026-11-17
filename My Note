@@ -111,4 +111,8 @@ run cmd>mvn clean package -DskipTest (If Error Unit Test)
 run cmd>mvn spring-boot:run
 http://localhost:8080/h2-console(open in braswer
 
-
+==================================================================================
+	Swagger Open api
+	
+Open on Browser
+http://localhost:8080/swagger-ui/index.html

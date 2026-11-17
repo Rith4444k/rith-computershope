@@ -2,7 +2,6 @@ package com.rith.java.developer.rith_computershope.controller;
 
 import java.util.List;
 import java.util.Map;
-import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -18,20 +17,31 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.rith.java.developer.rith_computershope.dto.BrandDTO;
+import com.rith.java.developer.rith_computershope.dto.ModelDTO;
 import com.rith.java.developer.rith_computershope.dto.PageDTO;
 import com.rith.java.developer.rith_computershope.entity.Brand;
+import com.rith.java.developer.rith_computershope.entity.Model;
 import com.rith.java.developer.rith_computershope.mapper.BrandMapper;
+import com.rith.java.developer.rith_computershope.mapper.ModelMapper;
 import com.rith.java.developer.rith_computershope.service.BrandService;
+import com.rith.java.developer.rith_computershope.service.ModelService;
+
+import io.swagger.v3.oas.annotations.tags.Tag;
 
 @RestController 
 @RequestMapping("brands")
+@Tag(
+	    name = "Brand Management",
+	    description = "APIs for managing brand"
+	)
+
 public class BrandController {
 	@Autowired
-	private  BrandService brandservice;
-
-	BrandController(BrandService brandservice) {
-		this.brandservice = brandservice;
-	}
+	private   BrandService brandservice;
+	@Autowired
+	private  ModelService modelService;
+	
+	
 	@RequestMapping(method = RequestMethod.POST)
 	public ResponseEntity<?> createBrand(@RequestBody BrandDTO branddto) {
 		Brand brand=BrandMapper.INSTANCE.toBrand(branddto);
@@ -69,6 +79,15 @@ public class BrandController {
 		brandservice.deleteById(brandId);
 		String respone ="Brand deleted successfully";
 		return ResponseEntity.ok(respone);
+	} 
+	
+	@GetMapping("/{id}/models") 
+	public ResponseEntity<?> getModelByBrand(@PathVariable("id") Integer brandId  ) {
+		List<Model> models =modelService.getByBrandId(brandId);
+		List<ModelDTO> modelDTO = models.stream()
+										.map(model->ModelMapper.INSTANCE.toModelDTO(model))
+										.toList();//Remember
+		return ResponseEntity.ok(modelDTO);
 	} 
 	
 }

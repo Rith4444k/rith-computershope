@@ -1,5 +1,7 @@
 package com.rith.java.developer.rith_computershope.service.impl;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -18,6 +20,11 @@ public class ModelServiceImpl implements ModelService {
 		
 		return modelRepository.save(model);
 		
+	}
+	@Override
+	public List<Model> getByBrandId(Integer Id) {
+		
+		return modelRepository.findByBrandId(Id);
 	}
 
 }

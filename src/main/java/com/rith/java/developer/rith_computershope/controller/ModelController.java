@@ -11,17 +11,23 @@ import com.rith.java.developer.rith_computershope.entity.Model;
 import com.rith.java.developer.rith_computershope.mapper.ModelMapper;
 import com.rith.java.developer.rith_computershope.service.ModelService;
 
+import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.RequiredArgsConstructor;
 
 
 @RequiredArgsConstructor// Can use instead of @Autowired
 @RestController
 @RequestMapping("/models")
+@Tag(
+	    name = "Model Management",
+	    description = "APIs for managing model"
+	)
 public class ModelController {
 	private final ModelService  modelService;
 	private final ModelMapper modelMapperp;
 	//@RequestMapping(method =RequestMethod.POST)
 	@PostMapping
+	
 	public ResponseEntity<?> createModel(@RequestBody  ModelDTO modelDto){
 		Model model = modelMapperp.toModel(modelDto);
 			  model =modelService.save(model);
