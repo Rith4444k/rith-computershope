@@ -1,0 +1,42 @@
+databaseChangeLog:
+- changeSet:
+    id: 001_init_bd_table
+    author: k.rith913158@gmail.com
+    changes:                                     
+    - createTable:
+        columns:
+        - column:
+            autoIncrement: true
+            constraints:
+              nullable: false
+              primaryKey: true
+              primaryKeyName: brands_pkey
+            name: brand_id
+            type: INTEGER
+        - column:
+            name: brand_name
+            type: VARCHAR(255)
+        tableName: brands
+        
+    - createTable:
+        tableName: models
+        columns:
+        - column:
+            autoIncrement: true
+            constraints:
+              nullable: false
+              primaryKey: true
+              primaryKeyName: models_pkey
+            name: model_id
+            type: INTEGER
+        - column:
+            name: model_name
+            type: VARCHAR(255)
+        - column:
+            name: brand_id
+            type: INTEGER
+            constraints:
+               foreignKeyName: fk_models_brands
+               reference: brands(brand_id)
+       
+        
