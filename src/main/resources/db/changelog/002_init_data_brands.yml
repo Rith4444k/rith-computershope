@@ -1,0 +1,15 @@
+databaseChangeLog:
+- changeSet:
+    id: 002_init_data_brands
+    author: k.rith913158@gmail.com
+    changes:                                     
+    - loadData:
+        tableName: brands
+        columns:
+        - column:
+            name: brand_id
+            type: INTEGER
+        - column:
+            name: brand_name
+            type: STRING
+        file: db/data/002_init_data_brands.cvs

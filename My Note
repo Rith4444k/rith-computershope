@@ -1,0 +1,118 @@
+===================================================================================
+
+								My Document Noted 
+								-----------------
+								
+===================================================================================			
+Old pom.xml
+<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-compiler-plugin</artifactId>
+				<executions>
+					<execution>
+						<id>default-compile</id>
+						<phase>compile</phase>
+						<goals>
+							<goal>compile</goal>
+						</goals>
+						<configuration>
+							<annotationProcessorPaths>
+								<path>
+                                     <groupId>org.mapstruct</groupId>
+                                     <artifactId>mapstruct-processor</artifactId>
+                                     <version>1.6.3</version>
+            					</path>                     
+								<path>
+									<groupId>org.projectlombok</groupId>
+									<artifactId>lombok</artifactId>
+								</path>
+							</annotationProcessorPaths>
+						</configuration>
+					</execution>
+					<execution>
+						<id>default-testCompile</id>
+						<phase>test-compile</phase>
+						<goals>
+							<goal>testCompile</goal>
+						</goals>
+						<configuration>
+							<annotationProcessorPaths>
+								<path>
+									<groupId>org.projectlombok</groupId>
+									<artifactId>lombok</artifactId>
+								</path>
+							</annotationProcessorPaths>
+						</configuration>
+					</execution>
+				</executions>
+			</plugin>
+
+===================================================================================			
+Datasources PostgreSQL
+	
+spring:
+  datasource:
+    url: jdbc:postgresql://localhost:5432/rith-computershope
+    username: rith-owner
+    password: 070809
+    driver-class-name: org.postgresql.Driver
+  jpa:
+   properties: 
+    hibernate:
+     dialect: org.hibernate.dialect.PostgreSQLDialect
+   hibernate:
+    ddl-auto: update
+  			
+===================================================================================
+Mapper use mapstruct auto create when we add new propertity in Entity class.
+===================================================================================
+Unit test have 3 step . for example
+	//Given 
+	List<String>names=List.of("Tra","Mora","Seyha","Rith");
+	//When
+	List<Integer> list= GeneralUtils.toIntegerLish(names);
+	//Then
+	//[3,4,5,4]
+	assertEquals(4, list.size());
+===================================================================================
+In Spring boot we need to test 3 Step 
+	+Controller
+	+Service
+	+Repository
+===================================================================================
+For Me use only Code Coverage 
+Coverage
+When it's mark green it's already Test (ok)
+When it's mark red we need to Create Unit test ..
+===================================================================================
+Repository Unit test 
+Run as>JUnit Test..
+
+Test H2 Database
+
+Datasources H2 DB
+----------------------------------------------
+spring:
+  datasource:
+    url: jdbc:h2:mem:mydb 
+    username: sa
+    password: 
+    driver-class-name:  org.h2.Driver
+  jpa:
+   properties: 
+    hibernate:
+     dialect: org.hibernate.dialect.H2Dialect
+   hibernate:
+    ddl-auto: create
+----------------------------------------------
+First Replaces Postgrase datasources to H2 datasources Application.yml
+ 
+run cmd>mvn clean package -DskipTest (If Error Unit Test)       
+run cmd>mvn spring-boot:run
+http://localhost:8080/h2-console(open in braswer
+
+==================================================================================
+	Swagger Open api
+	
+Open on Browser
+http://localhost:8080/swagger-ui/index.html
