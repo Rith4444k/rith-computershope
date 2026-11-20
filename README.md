@@ -1,4 +1,5 @@
 # rith-computershope
+<<<<<<< HEAD
 # Build for demo
 
 #  Rith Computer Shop Management System
@@ -133,3 +134,6 @@ Junior Backend Developer | Computer Science Graduate
 
  This project is currently under development. More features and improvements are coming soon.
 
+=======
+Build for demo
+>>>>>>> main
