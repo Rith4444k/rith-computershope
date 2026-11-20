@@ -1,0 +1,14 @@
+
+databaseChangeLog:
+  - changeSet:
+      id: 003_reset_brands_sequence
+      author: k.rith913158@gmail.com
+      dbms: postgresql
+      changes:
+        - sql:
+            sql: |
+              SELECT setval(
+                pg_get_serial_sequence('brands', 'brand_id'),
+                COALESCE((SELECT MAX(brand_id) FROM brands), 1),
+                EXISTS (SELECT 1 FROM brands)
+              );

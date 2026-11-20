@@ -45,6 +45,7 @@ public class BrandController {
 	@RequestMapping(method = RequestMethod.POST)
 	public ResponseEntity<?> createBrand(@RequestBody BrandDTO branddto) {
 		Brand brand=BrandMapper.INSTANCE.toBrand(branddto);
+					brandservice.create(brand);
 		return ResponseEntity.ok(BrandMapper.INSTANCE.toBrandDTO(brand));
 	}
 	@GetMapping("/{id}")

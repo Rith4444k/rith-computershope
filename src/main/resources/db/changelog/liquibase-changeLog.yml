@@ -1,5 +1,0 @@
-databaseChangeLog: 
-   - include:
-       file: db/changelog/001_init_database.yml
-   - include:
-       file: db/changelog/002_init_data_brands.yml

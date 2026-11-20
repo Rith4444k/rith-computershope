@@ -13,4 +13,3 @@ databaseChangeLog:
             name: brand_name
             type: STRING
         file: db/data/002_init_data_brands.cvs
-        
